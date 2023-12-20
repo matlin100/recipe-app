@@ -1,6 +1,22 @@
 
 
 
+/* RecipeList styles */
+.recipe-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
+  padding: 20px;
+  justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .recipe-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+
 /* RecipeCard styles */
 .recipe-card {
   margin: 20px;
@@ -11,3 +27,6 @@
     margin: 10px;
   }
 }
+
+
+
