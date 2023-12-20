@@ -1,4 +1,39 @@
+/* App.css */
+.spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
+
+/* header  */
+.app-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #4CAF50; 
+  color: white;
+  text-align: center;
+  padding: 15px ;
+  font-size: 24px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.search-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  padding: 10px;
+  margin-left: auto;
+}
+
+@media (max-width: 600px) {
+  .app-header {
+    font-size: 20px; /* Slightly smaller font on smaller screens */
+  }
+}
 
 
 /* RecipeList styles */
