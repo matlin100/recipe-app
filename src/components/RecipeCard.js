@@ -1,22 +1,47 @@
 import React, { useState } from 'react';
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Collapse from '@mui/material/Collapse';
 
 function RecipeCard({ recipe, imageUrl }) {
   const [showIngredients, setShowIngredients] = useState(false);
   const [showInstructions, setShowInstructions] = useState(false);
 
   return (
-    <div className="recipe-card">
-      <img src={imageUrl} alt="Recipe" />
-      <h3>Recipe {recipe.number}</h3>
-      <button onClick={() => setShowIngredients(!showIngredients)}>
-        {showIngredients ? 'Hide' : 'Show'} Ingredients
-      </button>
-      {showIngredients && <p>{recipe.ingredients}</p>}
-      <button onClick={() => setShowInstructions(!showInstructions)}>
-        {showInstructions ? 'Hide' : 'Show'} Instructions
-      </button>
-      {showInstructions && <p>{recipe.instructions}</p>}
-    </div>
+    <Card className="recipe-card" sx={{ maxWidth: 345, marginBottom: 2 }}>
+      <CardMedia
+        component="img"
+        height="140"
+        image={imageUrl}
+        alt="Recipe"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          Recipe {recipe.number}
+        </Typography>
+        <Button 
+          size="small" 
+          onClick={() => setShowIngredients(!showIngredients)}
+        >
+          {showIngredients ? 'Hide' : 'Show'} Ingredients
+        </Button>
+        <Collapse in={showIngredients} timeout="auto" unmountOnExit>
+          <Typography paragraph>{recipe.ingredients}</Typography>
+        </Collapse>
+        <Button 
+          size="small" 
+          onClick={() => setShowInstructions(!showInstructions)}
+        >
+          {showInstructions ? 'Hide' : 'Show'} Instructions
+        </Button>
+        <Collapse in={showInstructions} timeout="auto" unmountOnExit>
+          <Typography paragraph>{recipe.instructions}</Typography>
+        </Collapse>
+      </CardContent>
+    </Card>
   );
 }
 
