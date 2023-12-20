@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { fetchRecipes } from './api/recipes';
 import Main from './components/Main';
-import { ClipLoader } from 'react-spinners'; // Import the spinner
+import { ClipLoader } from 'react-spinners';
 import './App.css';
+
 
 function App() {
   const [recipesData, setRecipesData] = useState({ recipes: [], imageUrl: [] });
@@ -22,12 +23,13 @@ function App() {
     setIsLoading(false);
   };
 
-  // Fetch default data on mount
   useEffect(() => {
     fetchData();
   }, []);
 
   const toggleSearch = () => setShowSearch(!showSearch);
+ 
+
 
   return (
     <div className="App">
@@ -41,6 +43,7 @@ function App() {
         setRecipeType={setRecipeType}
         recipeAmount={recipeAmount}
         setRecipeAmount={setRecipeAmount}
+
       />
 
       {isLoading && (

@@ -10,7 +10,7 @@ function Main({ recipes, imageUrls, showSearch, onToggleSearch, onFetchData, rec
   return (
     <div className="main-container">
       <Header onToggleSearch={onToggleSearch} />
-      <Sidebar />
+      <Sidebar onToggleSearch={onToggleSearch} />
       {showSearch && 
         <RecipeForm 
           onFetchData={onFetchData} 
