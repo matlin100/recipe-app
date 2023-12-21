@@ -1,15 +1,14 @@
-// src/App.js
 import React, { useState, useEffect } from 'react';
-import { fetchRecipes } from './api/recipes';
+import { fetchRecipes ,uploadImageAndGetRecipes } from './api/recipes';
 import Main from './components/Main';
 import { ClipLoader } from 'react-spinners';
 import './App.css';
-
 
 function App() {
   const [recipesData, setRecipesData] = useState({ recipes: [], imageUrl: [] });
   const [isLoading, setIsLoading] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
+  const [showUploadImage, setShowUploadImage] = useState(false);
   const [recipeType, setRecipeType] = useState('pasta');
   const [recipeAmount, setRecipeAmount] = useState(5);
 
@@ -21,6 +20,17 @@ function App() {
       setRecipesData(data);
     }
     setIsLoading(false);
+    setShowSearch(false); // Hide the search form after fetching recipes
+  };
+
+  const handleImageUpload = async (imageFile) => {
+    setIsLoading(true);
+    const data = await uploadImageAndGetRecipes(imageFile);
+    if (data) {
+      setRecipesData(data);
+    }
+    setIsLoading(false);
+    setShowUploadImage(false); // Hide the upload form after fetching recipes
   };
 
   useEffect(() => {
@@ -28,8 +38,7 @@ function App() {
   }, []);
 
   const toggleSearch = () => setShowSearch(!showSearch);
- 
-
+  const toggleImageSearch = () => setShowUploadImage(!showUploadImage);
 
   return (
     <div className="App">
@@ -43,9 +52,10 @@ function App() {
         setRecipeType={setRecipeType}
         recipeAmount={recipeAmount}
         setRecipeAmount={setRecipeAmount}
-
+        showUploadImage={showUploadImage}
+        onToggleImageSearch={toggleImageSearch}
+        onImageUpload={handleImageUpload}
       />
-
       {isLoading && (
         <div className="spinner">
           <ClipLoader size={150} />

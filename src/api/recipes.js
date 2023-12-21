@@ -1,4 +1,4 @@
-// src/api/recipes.js
+//src/api/recipes.js
 import axios from 'axios';
 
 const API_ENDPOINT = 'http://localhost:3000/recipes/byType';
@@ -14,3 +14,21 @@ export const fetchRecipes = async (type, amount) => {
     return null;
   }
 };
+
+export const uploadImageAndGetRecipes = async (imageFile) => {
+  const formData = new FormData();
+  formData.append('image', imageFile);
+
+  try {
+    const response = await axios.post('http://localhost:3000/recipes/analyze-image', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error uploading image:', error);
+    return null;
+  }
+};
+
