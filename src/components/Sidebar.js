@@ -1,28 +1,30 @@
+// src/components/Sidebar.js
 import React, { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
-import './styles/Sidebar.css'; // Assuming you have a separate CSS file for Sidebar
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import MenuIcon from '@mui/icons-material/Menu'; // Import for 'Open' icon
+import CloseIcon from '@mui/icons-material/Close'; // Import for 'Close' icon
+import './styles/Sidebar.css';
 
-function Sidebar({ onToggleSearch ,onToggleImageSearch }) {
-  const [isOpen, setIsOpen] = useState(false); // Declare the isOpen state
+function Sidebar({ onToggleSearch, onToggleImageSearch  ,onToggleSidebar, isSidebarOpen }) {
+  const [isOpen, setIsOpen] = useState(onToggleSidebar);
 
   return (
-    <div className={`sidebar ${isOpen ? 'open' : ''}`}>
-      <button className="toggle-button" onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? 'Close' : 'Open'}
+    <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
+      <button className="toggle-button" onClick={ onToggleSidebar}>
+        {isSidebarOpen ? <CloseIcon /> : <MenuIcon />} 
       </button>
 
       <div className="sidebar-content">
-        {/* Other sidebar content */}
-        <p>Sidebar</p>
-        <button onClick={onToggleSearch} className="search-icon">
-          Search recipe <SearchIcon />
+        <button onClick={onToggleSearch} className="sidebar-button">
+          <SearchIcon className="sidebar-icon" />
+          Search recipe
         </button>
         
         <button onClick={onToggleImageSearch} className="sidebar-button">
-        Upload Image
-      </button>
-        
-
+          <CloudUploadIcon className="sidebar-icon" />
+          Upload Image
+        </button>
       </div>
     </div>
   );

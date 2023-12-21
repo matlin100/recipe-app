@@ -1,0 +1,28 @@
+/* src/styles/ImageUpload.css */
+.dropzone {
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+    width: 300px; /* Fixed width */
+    height: 200px; /* Fixed height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.dropzone:hover {
+    border-color: #342997;
+}
+
+.upload-icon {
+    margin-bottom: 10px;
+}
+
+.file-dropped {
+    border-color: #579936; /* Change border color when file is dropped */
+    background-color: #f0f8f0; /* Light green background */
+}

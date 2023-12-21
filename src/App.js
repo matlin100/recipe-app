@@ -11,6 +11,7 @@ function App() {
   const [showUploadImage, setShowUploadImage] = useState(false);
   const [recipeType, setRecipeType] = useState('pasta');
   const [recipeAmount, setRecipeAmount] = useState(5);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const fetchData = async (e) => {
     e?.preventDefault();
@@ -39,7 +40,7 @@ function App() {
 
   const toggleSearch = () => setShowSearch(!showSearch);
   const toggleImageSearch = () => setShowUploadImage(!showUploadImage);
-
+  const toggleSidebar = () => { setIsSidebarOpen(!isSidebarOpen);};
   return (
     <div className="App">
       <Main 
@@ -55,9 +56,11 @@ function App() {
         showUploadImage={showUploadImage}
         onToggleImageSearch={toggleImageSearch}
         onImageUpload={handleImageUpload}
+        isSidebarOpen={isSidebarOpen}
+        onToggleSidebar={toggleSidebar}
       />
       {isLoading && (
-        <div className="spinner">
+        <div className="spinner loading-overlay">
           <ClipLoader size={150} />
         </div>
       )}

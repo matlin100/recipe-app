@@ -16,11 +16,11 @@ function RecipeCard({ recipe, imageUrl }) {
         component="img"
         height="140"
         image={imageUrl}
-        alt="Recipe"
+        alt={recipe.name} // Use recipe name for alt text
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Recipe {recipe.number}
+          {recipe.name} {/* Display the recipe name */}
         </Typography>
         <Button 
           size="small" 

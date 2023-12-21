@@ -8,7 +8,7 @@
     background-color: #2B4D1B;
     color: white;
     transition: left 0.3s;
-    z-index: 1000;
+    z-index: 50;
   }
   
   .sidebar.open {
@@ -31,6 +31,28 @@
     padding: 20px;
   }
   
+  /* src/components/Sidebar.css */
+
+.sidebar-button {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+.sidebar-button:hover {
+  background-color: #365830; /* Slightly darker green on hover */
+}
+
+.sidebar-icon {
+  margin-right: 5px;
+}
+
   /* Responsive adjustments */
   @media (max-width: 600px) {
     .sidebar {
