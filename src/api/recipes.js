@@ -34,8 +34,7 @@ export const uploadImageAndGetRecipes = async (imageFile) => {
 
 export const fetchRecipesByMood = async (moodType) => {
   try {
-      const response = await axios.post(API_ENDPOINT + 'byMood', { moodType });
-      console.log(response.data);
+      const response = await axios.post(API_ENDPOINT + 'byMood', { type: moodType });
       return response.data;
   } catch (error) {
       console.error('Error fetching recipes by mood:', error);
@@ -44,3 +43,14 @@ export const fetchRecipesByMood = async (moodType) => {
 };
 
 
+
+export const fetchRecipesByIngredients = async (ingredients) => {
+  try {
+    const response = await axios.post(API_ENDPOINT + 'byIngredients', { ingredients });
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching recipes by ingredients:', error);
+    return null;
+  }
+};

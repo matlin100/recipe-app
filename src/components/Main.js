@@ -1,13 +1,13 @@
-// src/components/Main.js
 import React from 'react';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import RecipeList from './RecipeList';
 import Footer from './Footer';
 import RecipeForm from './RecipeForm';
-import ImageUpload from './ImageUpload'; // Assuming this is your component for image upload
-import MoodRecipeForm from './MoodRecipeForm'; // Assuming this is your component for mood-based recipe search
-import './styles/Main.css'; 
+import ImageUpload from './ImageUpload';
+import MoodRecipeForm from './MoodRecipeForm';
+import IngredientsForm from './IngredientsForm';
+import './styles/Main.css';
 
 function Main({
     recipes,
@@ -26,7 +26,11 @@ function Main({
     onToggleByMoodSearch,
     onFetchRecipesByMood,
     isSidebarOpen,
-    onToggleSidebar
+    onToggleSidebar,
+    showIngredientsForm,
+    onToggleIngredientsForm,
+    onFetchRecipesByIngredients,
+    onToggleByIngredientsSearch,
 }) {
     return (
         <div className={`main-container ${isSidebarOpen ? 'sidebar-open' : ''}`}>
@@ -35,8 +39,11 @@ function Main({
                 onToggleSearch={onToggleSearch}
                 onToggleImageSearch={onToggleImageSearch}
                 onToggleByMoodSearch={onToggleByMoodSearch}
+                onToggleByIngredientsSearch={onToggleByIngredientsSearch}
+                onToggleIngredientsForm={onToggleIngredientsForm}
                 isSidebarOpen={isSidebarOpen}
                 onToggleSidebar={onToggleSidebar}
+                
             />
             {showSearch && (
                 <RecipeForm
@@ -49,6 +56,7 @@ function Main({
             )}
             {showUploadImage && <ImageUpload onImageUpload={onImageUpload} />}
             {showByMoode && <MoodRecipeForm onFetchRecipesByMood={onFetchRecipesByMood} />}
+            {showIngredientsForm && <IngredientsForm onFetchRecipesByIngredients={onFetchRecipesByIngredients} />}
             <RecipeList recipes={recipes} imageUrls={imageUrls} />
             <Footer />
         </div>

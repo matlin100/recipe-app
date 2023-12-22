@@ -5,10 +5,9 @@ function MoodRecipeForm({ onFetchRecipesByMood }) {
     const [moodType, setMoodType] = useState('');
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Prevent default form submission
         onFetchRecipesByMood(moodType);
     };
-
     return (
         <form onSubmit={handleSubmit} className="recipe-form">
             <input 
@@ -16,7 +15,7 @@ function MoodRecipeForm({ onFetchRecipesByMood }) {
                 className="form-input"
                 value={moodType}
                 onChange={(e) => setMoodType(e.target.value)}
-                placeholder="Enter mood type"
+                placeholder="Enter your mode "
             />
             <button type="submit" className="submit-button">Get Recipes by Mood</button>
         </form>

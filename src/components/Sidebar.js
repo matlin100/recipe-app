@@ -1,13 +1,13 @@
-// src/components/Sidebar.js
 import React from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import MoodIcon from '@mui/icons-material/Mood'; // Import an icon for mood search
+import MoodIcon from '@mui/icons-material/Mood';
+import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import './styles/Sidebar.css';
 
-function Sidebar({ onToggleSearch, onToggleImageSearch, onToggleByMoodSearch, isSidebarOpen, onToggleSidebar }) {
+function Sidebar({ onToggleSearch, onToggleImageSearch, onToggleByMoodSearch, onToggleByIngredientsSearch, isSidebarOpen, onToggleSidebar }) {
     return (
         <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
             <button className="toggle-button" onClick={onToggleSidebar}>
@@ -28,6 +28,11 @@ function Sidebar({ onToggleSearch, onToggleImageSearch, onToggleByMoodSearch, is
                 <button onClick={onToggleByMoodSearch} className="sidebar-button">
                     <MoodIcon className="sidebar-icon" />
                     Search by Mood
+                </button>
+
+                <button onClick={onToggleByIngredientsSearch} className="sidebar-button">
+                    <LocalGroceryStoreIcon className="sidebar-icon" />
+                    Search by Ingredients
                 </button>
             </div>
         </div>
