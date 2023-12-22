@@ -1,12 +1,12 @@
 //src/api/recipes.js
 import axios from 'axios';
 
-const API_ENDPOINT = 'http://localhost:3000/recipes/byType';
+const API_ENDPOINT = 'http://localhost:3000/recipes/';
 
 export const fetchRecipes = async (type, amount) => {
   try {
     // Use POST request and send data in the body
-    const response = await axios.post(API_ENDPOINT, { type, amount });
+    const response = await axios.post(API_ENDPOINT+'byType', { type, amount });
     console.log(response.data)
     return response.data;
   } catch (error) {
@@ -20,7 +20,7 @@ export const uploadImageAndGetRecipes = async (imageFile) => {
   formData.append('image', imageFile);
 
   try {
-    const response = await axios.post('http://localhost:3000/recipes/analyze-image', formData, {
+    const response = await axios.post(API_ENDPOINT+'analyze-image', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -31,4 +31,16 @@ export const uploadImageAndGetRecipes = async (imageFile) => {
     return null;
   }
 };
+
+export const fetchRecipesByMood = async (moodType) => {
+  try {
+      const response = await axios.post(API_ENDPOINT + 'byMood', { moodType });
+      console.log(response.data);
+      return response.data;
+  } catch (error) {
+      console.error('Error fetching recipes by mood:', error);
+      return null;
+  }
+};
+
 

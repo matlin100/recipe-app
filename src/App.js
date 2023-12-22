@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchRecipes ,uploadImageAndGetRecipes } from './api/recipes';
+import { fetchRecipes ,uploadImageAndGetRecipes, fetchRecipesByMood } from './api/recipes';
 import Main from './components/Main';
 import { ClipLoader } from 'react-spinners';
 import './App.css';
@@ -9,6 +9,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [showUploadImage, setShowUploadImage] = useState(false);
+  const [showByMoode, setSByMoode] = useState(false);
   const [recipeType, setRecipeType] = useState('pasta');
   const [recipeAmount, setRecipeAmount] = useState(5);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -34,12 +35,24 @@ function App() {
     setShowUploadImage(false); // Hide the upload form after fetching recipes
   };
 
+  const fetchRecipesByMood = async (e) => {
+    e?.preventDefault();
+    setIsLoading(true);
+    const data = await fetchRecipes(recipeType, recipeAmount);
+    if (data) {
+      setRecipesData(data);
+    }
+    setIsLoading(false);
+    setShowSearch(false); // Hide the search form after fetching recipes
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
 
   const toggleSearch = () => setShowSearch(!showSearch);
   const toggleImageSearch = () => setShowUploadImage(!showUploadImage);
+  const toggleByMoodSearch = () => setSByMoode(!showByMoode);
   const toggleSidebar = () => { setIsSidebarOpen(!isSidebarOpen);};
   return (
     <div className="App">
@@ -58,6 +71,9 @@ function App() {
         onImageUpload={handleImageUpload}
         isSidebarOpen={isSidebarOpen}
         onToggleSidebar={toggleSidebar}
+        onFetchRecipesByMood={fetchRecipesByMood}
+        onToggleByMoodSearch={toggleByMoodSearch}
+        onShowByMoode={showByMoode}
       />
       {isLoading && (
         <div className="spinner loading-overlay">
