@@ -31,10 +31,11 @@ function Main({
     onToggleIngredientsForm,
     onFetchRecipesByIngredients,
     onToggleByIngredientsSearch,
+    
 }) {
     return (
         <div className={`main-container ${isSidebarOpen ? 'sidebar-open' : ''}`}>
-            <Header onToggleSearch={onToggleSearch} />
+            <Header onToggleSearch={onToggleSearch} onToggleSidebar={onToggleSidebar}/>
             <Sidebar 
                 onToggleSearch={onToggleSearch}
                 onToggleImageSearch={onToggleImageSearch}
@@ -52,11 +53,12 @@ function Main({
                     setRecipeType={setRecipeType}
                     recipeAmount={recipeAmount}
                     setRecipeAmount={setRecipeAmount}
+                    onToggleSearch={onToggleSearch}
                 />
             )}
-            {showUploadImage && <ImageUpload onImageUpload={onImageUpload} />}
+            {showUploadImage && <ImageUpload onImageUpload={onImageUpload}   onToggleImageSearch={onToggleImageSearch}/>}
             {showByMoode && <MoodRecipeForm onFetchRecipesByMood={onFetchRecipesByMood} />}
-            {showIngredientsForm && <IngredientsForm onFetchRecipesByIngredients={onFetchRecipesByIngredients} />}
+            {showIngredientsForm && <IngredientsForm onFetchRecipesByIngredients={onFetchRecipesByIngredients} onToggleByIngredientsSearch={onToggleByIngredientsSearch}/>}
             <RecipeList recipes={recipes} imageUrls={imageUrls} />
             <Footer />
         </div>

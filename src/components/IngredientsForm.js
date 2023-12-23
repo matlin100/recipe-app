@@ -1,50 +1,90 @@
 import React, { useState, useEffect } from 'react';
-import './styles/IngredientsForm.css'; // Make sure to create this CSS file
+import { TextField, Button, Grid, Paper, IconButton } from '@mui/material';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 
-function IngredientsForm({ onFetchRecipesByIngredients }) {
-    const [ingredients, setIngredients] = useState(['']);
+function IngredientsForm({ onFetchRecipesByIngredients, onToggleByIngredientsSearch }) {
+  const [ingredients, setIngredients] = useState(['']);
 
-    useEffect(() => {
-        // Automatically add a new input field if the last one is filled
-        if (ingredients.length > 0 && ingredients[ingredients.length - 1].trim() !== '') {
-            setIngredients([...ingredients, '']);
-        }
-    }, [ingredients]);
+  useEffect(() => {
+    // Remove empty ingredient fields when rendering
+    const filteredIngredients = ingredients.filter((ingredient) => ingredient.trim() !== '');
+    if (filteredIngredients.length === 0) {
+      setIngredients(['']);
+    } else {
+      setIngredients(filteredIngredients);
+    }
+  }, []);
 
-    const handleIngredientChange = (index, value) => {
-        let newIngredients = [...ingredients];
-        newIngredients[index] = value;
+  const handleIngredientChange = (index, value) => {
+    const newIngredients = [...ingredients];
+    newIngredients[index] = value;
+    setIngredients(newIngredients);
+  };
 
-        // Remove empty inputs, except the last one
-        newIngredients = newIngredients.filter((ingredient, idx) => {
-            return ingredient.trim() !== '' || idx === newIngredients.length - 1;
-        });
+  const handleRemoveIngredient = (index) => {
+    const newIngredients = ingredients.filter((_, idx) => idx !== index);
+    setIngredients(newIngredients);
+  };
 
-        setIngredients(newIngredients);
-    };
+  const handleKeyDown = (event, index) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      if (index === ingredients.length - 1) {
+        setIngredients([...ingredients, '']);
+      }
+    }
+  };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        onFetchRecipesByIngredients(ingredients.filter(ingredient => ingredient.trim() !== ''));
-    };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const filteredIngredients = ingredients.filter((ingredient) => ingredient.trim() !== '');
+    onFetchRecipesByIngredients(filteredIngredients);
+    onToggleByIngredientsSearch();
+  };
 
-    return (
-        <form onSubmit={handleSubmit} className="ingredients-form">
-            {ingredients.map((ingredient, index) => (
-                <input
-                    key={index}
-                    type="text"
-                    className="form-input"
-                    value={ingredient}
-                    onChange={(e) => handleIngredientChange(index, e.target.value)}
-                    placeholder={`Ingredient ${index + 1}`}
+  return (
+    <Paper elevation={3} sx={{ padding: 3, margin: 2 }}>
+      <form onSubmit={handleSubmit}>
+        <Grid container spacing={2} alignItems="center" justifyContent="center">
+          {ingredients.map((ingredient, index) => (
+            <React.Fragment key={index}>
+              <Grid item xs={10}>
+                <TextField
+                  fullWidth
+                  label={`Ingredient ${index + 1}`}
+                  variant="outlined"
+                  value={ingredient}
+                  onChange={(e) => handleIngredientChange(index, e.target.value)}
+                  placeholder="Enter an ingredient"
+                  onKeyDown={(e) => handleKeyDown(e, index)}
                 />
-            ))}
-            <button type="submit" className="submit-button">
-                Get Recipes
-            </button>
-        </form>
-    );
+              </Grid>
+              <Grid item xs={2}>
+                <IconButton
+                  color="error"
+                  onClick={() => handleRemoveIngredient(index)}
+                  disabled={ingredients.length === 1}
+                >
+                  <RemoveCircleOutlineIcon />
+                </IconButton>
+              </Grid>
+            </React.Fragment>
+          ))}
+          <Grid item xs={12}>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+            >
+              Get Recipes
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
+    </Paper>
+  );
 }
 
 export default IngredientsForm;

@@ -7,12 +7,13 @@ import './App.css';
 function App() {
     const [recipesData, setRecipesData] = useState({ recipes: [], imageUrl: [] });
     const [isLoading, setIsLoading] = useState(false);
-    const [showSearch, setShowSearch] = useState(false);
-    const [showUploadImage, setShowUploadImage] = useState(false);
     const [showByMoode, setShowByMoode] = useState(false);
     const [recipeType, setRecipeType] = useState('pasta');
     const [recipeAmount, setRecipeAmount] = useState(5);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [showSearch, setShowSearch] = useState(false);
+    const [showUploadImage, setShowUploadImage] = useState(false);
+    
     const [showIngredientsForm, setShowIngredientsForm] = useState(false);
 
     const fetchData = async (e) => {
@@ -66,15 +67,38 @@ function App() {
         fetchData();
     }, []);
 
-    const toggleSearch = () => setShowSearch(!showSearch);
-    const toggleImageSearch = () => setShowUploadImage(!showUploadImage);
-    const toggleByMoodSearch = () => setShowByMoode(!showByMoode);
-    const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-    const toggleByIngredientsSearch = () => setShowIngredientsForm(!showIngredientsForm);
-
+    const toggleSearch = () => {
+        setShowSearch(!showSearch);
+        setShowUploadImage(false); // Close other sections
+        setShowByMoode(false);
+        setShowIngredientsForm(false);
+      };
+    
+      const toggleImageSearch = () => {
+        setShowUploadImage(!showUploadImage);
+        setShowSearch(false); // Close other sections
+        setShowByMoode(false);
+        setShowIngredientsForm(false);
+      };
+    
+      const toggleByMoodSearch = () => {
+        setShowByMoode(!showByMoode);
+        setShowSearch(false); // Close other sections
+        setShowUploadImage(false);
+        setShowIngredientsForm(false);
+      };
+    
+      const toggleByIngredientsSearch = () => {
+        setShowIngredientsForm(!showIngredientsForm);
+        setShowSearch(false); // Close other sections
+        setShowUploadImage(false);
+        setShowByMoode(false);
+      };
+    const toggleSidebar = () => { setIsSidebarOpen(!isSidebarOpen);  };
     return (
         <div className="App">
             <Main 
+
                 recipes={recipesData.recipes} 
                 imageUrls={recipesData.imageUrl}
                 showSearch={showSearch}

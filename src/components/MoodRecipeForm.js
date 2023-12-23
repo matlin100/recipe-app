@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './styles/RecipeForm.css'; // Reuse the styles from RecipeForm
+import { TextField, Button, Paper, Grid } from '@mui/material';
 
 function MoodRecipeForm({ onFetchRecipesByMood }) {
     const [moodType, setMoodType] = useState('');
@@ -7,18 +7,36 @@ function MoodRecipeForm({ onFetchRecipesByMood }) {
     const handleSubmit = (e) => {
         e.preventDefault(); // Prevent default form submission
         onFetchRecipesByMood(moodType);
+       
     };
+
     return (
-        <form onSubmit={handleSubmit} className="recipe-form">
-            <input 
-                type="text"
-                className="form-input"
-                value={moodType}
-                onChange={(e) => setMoodType(e.target.value)}
-                placeholder="Enter your mode "
-            />
-            <button type="submit" className="submit-button">Get Recipes by Mood</button>
-        </form>
+        <Paper elevation={3} sx={{ padding: 3, margin: 2, maxWidth: 500, mx: 'auto' }}>
+            <form onSubmit={handleSubmit}>
+                <Grid container spacing={2} alignItems="center" justifyContent="center">
+                    <Grid item xs={12}>
+                        <TextField
+                            fullWidth
+                            label="Mood"
+                            variant="outlined"
+                            value={moodType}
+                            onChange={(e) => setMoodType(e.target.value)}
+                            placeholder="Enter your mood"
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Button 
+                            type="submit" 
+                            variant="contained" 
+                            color="primary" 
+                            fullWidth
+                        >
+                            Get Recipes by Mood
+                        </Button>
+                    </Grid>
+                </Grid>
+            </form>
+        </Paper>
     );
 }
 
