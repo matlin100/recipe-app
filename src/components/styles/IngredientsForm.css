@@ -1,0 +1,46 @@
+/* src/styles/IngredientsForm.css */
+
+.ingredients-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    background: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+  }
+  
+  .form-input {
+    width: 80%;
+    max-width: 500px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+  }
+  
+  .add-button,
+  .submit-button {
+    padding: 10px 20px;
+    border-radius: 4px;
+    background-color: #579936;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .add-button {
+    background-color: #6c757d; /* Slightly different color for 'Add Ingredient' */
+  }
+  
+  @media (max-width: 600px) {
+    .form-input,
+    .add-button,
+    .submit-button {
+      width: 95%;
+    }
+  }
+  

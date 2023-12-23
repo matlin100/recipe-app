@@ -1,0 +1,15 @@
+/* src/styles/Main.css */
+.main-container {
+    transition: margin-left 0.3s;
+  }
+  
+  .main-container.sidebar-open {
+    margin-left: 250px; /* same as the width of the sidebar */
+  }
+  
+  @media (max-width: 600px) {
+    .main-container.sidebar-open {
+      margin-left: 100%; /* full width for smaller screens */
+    }
+  }
+  

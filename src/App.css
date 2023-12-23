@@ -1,0 +1,74 @@
+/* App.css */
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100; /* Ensure it's above all other content */
+}
+
+/* header  */
+.app-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #4CAF50; 
+  color: white;
+  text-align: center;
+  padding: 15px ;
+  font-size: 24px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.search-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  padding: 10px;
+  margin-left: auto;
+}
+
+@media (max-width: 600px) {
+  .app-header {
+    font-size: 20px; /* Slightly smaller font on smaller screens */
+  }
+}
+
+
+/* RecipeList styles */
+.recipe-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
+  padding: 20px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 600px) {
+  .recipe-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* RecipeCard styles */
+.recipe-card {
+  margin: 20px;
+}
+
+@media (max-width: 768px) {
+  .recipe-card {
+    margin: 10px;
+  }
+}
+
+
+
