@@ -1,4 +1,3 @@
-// src/components/Sidebar.js
 import React from 'react';
 import {
   Drawer, List, ListItem, ListItemIcon, ListItemText,
@@ -8,18 +7,20 @@ import SearchIcon from '@mui/icons-material/Search';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import MoodIcon from '@mui/icons-material/Mood';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
-import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
 
-function Sidebar({ onToggleSearch, onToggleImageSearch, onToggleByMoodSearch, onToggleByIngredientsSearch, isSidebarOpen, onToggleSidebar }) {
+function Sidebar({ onToggleSearch, onToggleImageSearch, onToggleByMoodSearch, onToggleByIngredientsSearch, isSidebarOpen, onToggleSidebar, onToggleContactForm }) {
+  const handleCloseMenu = () => {
+    onToggleSidebar();
+  };
+
   return (
-    <Drawer open={isSidebarOpen} onClose={onToggleSidebar} anchor="left">
-         
-    <IconButton onClick={onToggleSidebar}>
-      <CloseIcon />
-    </IconButton>
+    <Drawer open={isSidebarOpen} onClose={handleCloseMenu} anchor="left">
+      <IconButton onClick={handleCloseMenu}>
+        <CloseIcon />
+      </IconButton>
       <Divider />
-   
       <List>
         <ListItem button onClick={onToggleSearch}>
           <ListItemIcon><SearchIcon /></ListItemIcon>
@@ -36,6 +37,10 @@ function Sidebar({ onToggleSearch, onToggleImageSearch, onToggleByMoodSearch, on
         <ListItem button onClick={onToggleByIngredientsSearch}>
           <ListItemIcon><LocalGroceryStoreIcon /></ListItemIcon>
           <ListItemText primary="Search by Ingredients" />
+        </ListItem>
+        <ListItem button onClick={onToggleContactForm}>
+          <ListItemIcon><ContactMailIcon /></ListItemIcon>
+          <ListItemText primary="Contact Us" />
         </ListItem>
       </List>
       <Divider />

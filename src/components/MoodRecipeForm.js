@@ -17,7 +17,7 @@ function MoodRecipeForm({ onFetchRecipesByMood }) {
                     <Grid item xs={12}>
                         <TextField
                             fullWidth
-                            label="Mood"
+                            label="what is your Mood"
                             variant="outlined"
                             value={moodType}
                             onChange={(e) => setMoodType(e.target.value)}

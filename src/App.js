@@ -13,8 +13,9 @@ function App() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [showSearch, setShowSearch] = useState(false);
     const [showUploadImage, setShowUploadImage] = useState(false);
-    
     const [showIngredientsForm, setShowIngredientsForm] = useState(false);
+    const [showContactForm, setShowContactForm] = useState(false);
+
 
     const fetchData = async (e) => {
         e?.preventDefault();
@@ -72,6 +73,7 @@ function App() {
         setShowUploadImage(false); // Close other sections
         setShowByMoode(false);
         setShowIngredientsForm(false);
+        setShowContactForm(false);
       };
     
       const toggleImageSearch = () => {
@@ -79,6 +81,7 @@ function App() {
         setShowSearch(false); // Close other sections
         setShowByMoode(false);
         setShowIngredientsForm(false);
+        setShowContactForm(false);
       };
     
       const toggleByMoodSearch = () => {
@@ -86,6 +89,7 @@ function App() {
         setShowSearch(false); // Close other sections
         setShowUploadImage(false);
         setShowIngredientsForm(false);
+        setShowContactForm(false);
       };
     
       const toggleByIngredientsSearch = () => {
@@ -93,8 +97,19 @@ function App() {
         setShowSearch(false); // Close other sections
         setShowUploadImage(false);
         setShowByMoode(false);
+        setShowContactForm(false);
       };
-    const toggleSidebar = () => { setIsSidebarOpen(!isSidebarOpen);  };
+
+   
+    const toggleContactForm = () => { 
+        setShowContactForm(!showContactForm)
+        setShowSearch(false); // Close other sections
+        setShowUploadImage(false);
+        setShowByMoode(false);
+        setShowIngredientsForm(false);};
+      
+    const toggleSidebar = () => { setIsSidebarOpen(!isSidebarOpen);  };  
+      
     return (
         <div className="App">
             <Main 
@@ -118,7 +133,9 @@ function App() {
                 showByMoode={showByMoode}
                 showIngredientsForm={showIngredientsForm}
                 onToggleByIngredientsSearch={toggleByIngredientsSearch}
-                onFetchRecipesByIngredients={onFetchRecipesByIngredients} 
+                onFetchRecipesByIngredients={onFetchRecipesByIngredients}
+                showContactForm={showContactForm}
+                onToggleContactForm={toggleContactForm} 
             />
             {isLoading && (
                 <div className="spinner loading-overlay">

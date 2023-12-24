@@ -9,8 +9,10 @@ function Footer() {
         bgcolor: 'primary.main',
         color: 'white',
         py: 3,
-        position: 'absolute',
+        position: 'fixed', // Use 'fixed' instead of 'absolute'
         bottom: 0,
+        left: 0,
+        right: 0,
         width: '100%',
       }}
     >

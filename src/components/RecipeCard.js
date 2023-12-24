@@ -1,56 +1,68 @@
 import React, { useState } from 'react';
-import {
-  Card, CardMedia, CardContent, Typography,
-  Button, Collapse, CardActions, Chip, Stack
-} from '@mui/material';
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import KitchenIcon from '@mui/icons-material/Kitchen';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
 function RecipeCard({ recipe, imageUrl }) {
-  const [expanded, setExpanded] = useState(false);
+  const [showIngredients, setShowIngredients] = useState(false);
+  const [showInstructions, setShowInstructions] = useState(false);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  const renderIngredients = () => {
+    return recipe.ingredients.split('\n').map((ingredient, index) => (
+      <Typography key={index} paragraph>
+        {ingredient}
+      </Typography>
+    ));
+  };
+
+  const renderInstructions = () => {
+    return recipe.instructions.split('\n').map((instruction, index) => (
+      <Typography key={index} paragraph>
+        {instruction}
+      </Typography>
+    ));
   };
 
   return (
-    <Card sx={{ maxWidth: 345, m: 2, boxShadow: 4, borderRadius: 2, borderColor: 'primary.main' }}>
+    <Card className="recipe-card" sx={{ maxWidth: 345, marginBottom: 2 }}>
       <CardMedia
         component="img"
-        height="200"
+        height="140"
         image={imageUrl}
         alt={recipe.name}
       />
       <CardContent>
-        <Typography gutterBottom variant="h6" component="div" color="primary">
+        <Typography gutterBottom variant="h5" component="div">
           {recipe.name}
         </Typography>
-        <Stack direction="row" spacing={1} mb={1}>
-          <Chip icon={<KitchenIcon />} label="Recipe" color="primary" />
-          {/* Additional chips or tags can be added here */}
-        </Stack>
-        <Typography variant="body2" color="text.secondary">
-          {recipe.shortDescription || 'Delicious and easy to make!'} {/* Optional short description */}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
         <Button
-          onClick={handleExpandClick}
-          endIcon={<ExpandMoreIcon />}
           size="small"
-          color="primary"
+          onClick={() => setShowIngredients(!showIngredients)}
+          startIcon={showIngredients ? <ExpandLessIcon /> : <ExpandMoreIcon />}
         >
-          {expanded ? 'Less' : 'More'}
+          {showIngredients ? 'Hide' : 'Show'} Ingredients
         </Button>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph variant="subtitle2" color="primary">Ingredients:</Typography>
-          <Typography paragraph>{recipe.ingredients}</Typography>
-          <Typography paragraph variant="subtitle2" color="primary">Instructions:</Typography>
-          <Typography paragraph>{recipe.instructions}</Typography>
-        </CardContent>
-      </Collapse>
+        <Collapse in={showIngredients} timeout="auto" unmountOnExit>
+          {renderIngredients()}
+        </Collapse>
+        <Button
+          size="small"
+          onClick={() => setShowInstructions(!showInstructions)}
+          startIcon={
+            showInstructions ? <ExpandLessIcon /> : <ExpandMoreIcon />
+          }
+        >
+          {showInstructions ? 'Hide' : 'Show'} Instructions
+        </Button>
+        <Collapse in={showInstructions} timeout="auto" unmountOnExit>
+          {renderInstructions()}
+        </Collapse>
+      </CardContent>
     </Card>
   );
 }
